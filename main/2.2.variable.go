@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 /*
 	------------------变量----------------------------------------------
 
@@ -35,4 +37,41 @@ package main
 
 func main() {
 
+	// new函数 ------------------------------------------- 另一个创建变量的方法
+
+	p := new(int)	//0xc420014048  ->  p是一个变量的地址
+	fmt.Println(*p) //0 			->  *p才是值
+
+	q := new(int)
+	fmt.Println(q == p)		//false	->  new()每次都会得到新的变量的地址
+
+
+	//  元组赋值  ----------------------------------
+	x,y := 1,3
+	x, y = y, x		//用来交换两个变量的值
+	fmt.Println("x y分别为",x,y)
+
+	fmt.Println("最大公约数为：", gcd(24,17) )
+	fmt.Println("斐波那契数列第9个数为：", fib(9))
+
+}
+
+//计算两个数值的最大公约数（GCD）
+func gcd(x, y int) int {
+	for y != 0 {
+		fmt.Println(x,y)
+		x, y = y, x%y
+		fmt.Println("---> ",x,y)
+	}
+	return x
+}
+
+
+//计算斐波那契数列 的第n个值
+func fib(n int) int {
+	x, y := 0, 1
+	for i := 0; i < n; i++ {
+		x, y = y, x + y
+	}
+	return x
 }
