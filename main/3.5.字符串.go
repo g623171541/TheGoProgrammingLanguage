@@ -6,6 +6,7 @@ import (
 	"strings"
 	"reflect"
 	"bytes"
+	"strconv"
 )
 
 /*
@@ -85,6 +86,24 @@ Usage:
 
 	//将数字数组转换为字符串
 	fmt.Println(intsToString( []int{1,2,3}) )
+
+	//整数 -> 字符串
+	x := 123
+	y := fmt.Sprintf("%d",x)		//①使用fmt.Sprintf()返回一个格式化的字符串
+	fmt.Println(y,strconv.Itoa(x))		//②使用strconv.Itoa() int -> string
+
+	//FormatInt()可以用不同进制来格式化数字
+	fmt.Println(strconv.FormatInt(int64(x),2))		//1111011
+
+	//fmt.Sprintf()会返回一个string，用于格式化字符串
+	fmt.Println( fmt.Sprintf("x=%d",x) )
+
+
+	//字符串 -> 整数
+	a, _ := strconv.Atoi("111")
+	fmt.Println(reflect.TypeOf(a),a)
+	b, _ := strconv.ParseInt("222",10,64)
+	fmt.Println(reflect.TypeOf(b),b)		//b的类型总是int64
 
 }
 
