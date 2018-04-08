@@ -79,7 +79,7 @@ func func4()  {
 
 	c1 := sha256.Sum256([]byte("x"))
 	c2 := sha256.Sum256([]byte("X"))
-	fmt.Printf("%x\n",c1)
+	fmt.Printf("%x\n",c1)		//十六进制打印
 	fmt.Println(c2)
 	fmt.Println(c1 == c2)
 	fmt.Println(reflect.TypeOf(c1))
