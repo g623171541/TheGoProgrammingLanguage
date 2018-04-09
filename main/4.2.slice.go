@@ -21,11 +21,28 @@ func main()  {
 	slice1()
 
 	a := []int{1,2,3,4,5,6,7} 	// slice类型的变量a，初始化的时候没有指明序列的长度，会隐式的创建一个大小合适的长度
-	fmt.Println( reverse(a) )	//倒序排列
+	fmt.Println( reverse(a) )	// 倒序排列
 
-	slice2()		//slice的比较，不能比较
+	slice2()		// slice的比较，不能比较
+	slice3()		// append函数
+
+	var x, y []int				//利用appendInt追加slice
+	for i := 1; i < 10; i++ {
+		y = appendInt(x,i,0)
+		fmt.Printf("%d cap=%d\t%v\n",i,cap(y),y)
+		x = y
+	}
+
+	data := []string{"1","","3"}
+	fmt.Println(data)				// [1  3]
+	fmt.Println(nonempty(data))		// [1 3]		共用一个底层数组，改变原有的数据
+	fmt.Println(data)				// [1 3 3]
 
 
+	data2 := []string{"a","","b"}
+	fmt.Println(data2)
+	fmt.Println(nonempty2(data2))
+	fmt.Println(data2)
 }
 
 func slice1()  {
@@ -74,6 +91,11 @@ func slice2()  {
 	b := []string{"a","b"}
 	fmt.Println(equal(a,b))
 
+	//用 len(s) == 0 来判断一个slice是否为空
+	if len(a) == 0 {
+		return
+	}
+
 }
 
 //两个slice的比较
@@ -87,4 +109,59 @@ func equal(x,y []string) bool {
 		}
 	}
 	return true
+}
+
+// append函数
+func slice3() {
+	// 内置append函数用于想slice追加元素
+
+	// runes 是int32的别名，在UTF-8 世界的字符有时被称作runes。通常，当人们讨论字符时，多数是指8 位字符。UTF-8 字符可能会有32 位，称作rune
+	var runes []rune
+
+	for _,r := range "Hello UBK"{
+		runes = append(runes,r)
+	}
+	fmt.Printf("%q\n",runes)
+}
+
+
+// appendInt 函数，专门用于处理 []int 类型的slice
+func appendInt(x []int, y ...int) []int {		// 利用...表示接收多个参数
+	var z []int
+	//zlen := len(x) + 1		//如果参数没有...则用这行
+	zlen := len(x) + len(y)
+	if zlen <= cap(x) {
+		z = x[:zlen]
+	}else {
+		zcap := zlen
+		if zcap < 2*len(x) {
+			zcap = 2 * len(x)
+		}
+		z = make([]int,zlen,zcap)
+		copy(z,x)
+	}
+	//z[len(x)] = y				//如果参数没有...则用这行
+	copy(z[len(x):],y)
+	return z
+}
+
+func nonempty(strings []string) []string {
+	i := 0
+	for _,s := range strings {
+		if s != "" {
+			strings[i] = s
+			i++
+		}
+	}
+	return strings[:i]
+}
+// 跟上面效果一样的
+func nonempty2(strings []string) []string {
+	out := strings[:0]
+	for _,s := range strings{
+		if s != "" {
+			out = append(out,s)
+		}
+	}
+	return out
 }
