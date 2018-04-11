@@ -1,6 +1,6 @@
 # 《The Go Programming Language》Go语言圣经 书籍学习
 
-## 代码目录
+代码目录
 ---
 
 - 1.1 打印格式 %d等
