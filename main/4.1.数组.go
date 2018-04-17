@@ -4,10 +4,39 @@ import (
 	"fmt"
 	"crypto/sha256"
 	"reflect"
+	"golang.org/x/net/html/atom"
 )
 
 /*
 	数组：
+
+	切片和数组的区别：
+
+		切片是动态数组，注意两者初始化和函数参数的区别。
+
+		1、初始化：	数组需要指定大小，不指定也会根据初始化的自动推算出大小，不可改变
+					切片不需要指定的大小
+
+		数组： a := [...]int{1,2,3}   a := [3]int{1,2,3}
+		切片： a:= []int{1,2,3}  a := make([]int, 5) a := make([]int, 5, 10)
+
+
+		2、函数传递：
+
+		数组需要明确指定大小，切片不需要。数组是值传递，切片是地址传递
+
+-------
+	数组有3种创建方式：
+		1）[length]Type　
+		2）[N]Type{value1, value2, ... , valueN}
+		3）[...]Type{value1, value2, ... , valueN}
+
+	切片的创建有4种方式：
+		1）make ( []Type ,length, capacity )
+		2) make ( []Type, length)
+		3) []Type{}
+		4) []Type{value1 , value2 , ... , valueN }
+
 
  */
 
@@ -16,6 +45,8 @@ func main()  {
 	func2()		//...创建数组，并指定数组编号
 	func3()		//数组[...]int{3:-1} 的定义，数组的比较
 	func4()
+
+	func5()		// 数组和切片比较
 }
 
 
@@ -85,4 +116,20 @@ func func4()  {
 	fmt.Println(reflect.TypeOf(c1))
 
 	fmt.Println("----------func4到此结束----------")
+
+
+}
+
+func func5()  {
+	fmt.Println(reflect.TypeOf([3]string{}))
+	fmt.Println([2]string{} == [2]string{})
+
+	var s1 = [2]string{"1","2"}		//有长度的，是数组
+	var s2 = []string{"1","2"}		//没长度的，是切片
+	fmt.Println(reflect.TypeOf(s1))
+	fmt.Println(reflect.TypeOf(s2))
+
+	s1 = append(s1,"3")		//数组长度是固定的，不可以追加元素
+	s2 = append(s2,"3")		//切片可以追加元素
+	fmt.Println("----------func5到此结束----------")
 }

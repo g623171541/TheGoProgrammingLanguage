@@ -3,6 +3,7 @@ package main
 import (
 	"strings"
 	"fmt"
+	"sort"
 )
 
 /*
@@ -23,6 +24,8 @@ func main()  {
 	fmt.Println(f())		// 1
 	fmt.Println(f())		// 4
 	//例子证明，函数值不仅仅是一串代码，还记录了状态。
+
+
 }
 
 
@@ -38,3 +41,47 @@ func squares() (func() int) {
 	}
 }
 
+
+
+
+// ---------------------- 拓扑排序 ---------------
+// []string 是切片slice类型
+var prereqs = map[string][]string{
+	"algorithms":	{"data structures"},
+	"calulus":		{"linear algebra"},
+	"compilers":	{
+		"data structures",
+		"formal languages",
+		"computer organization",
+	},
+	"data structures":		{"discrete math"},
+	"databases":			{"data structures"},
+	"discrete math":		{"intro to programming"},
+	"formal languages": 	{"discrete math"},
+	"networks":				{"operating systems"},
+	"operating systems":	{"data structures","computer organization"},
+	"programming languages":{"data structures","computer organization"},
+}
+
+func topoSort(m map[string][]string) []string {
+	var order []string
+	seen := make(map[string]bool)
+	var visitAll func(items []string)	//当匿名函数需要被递归调用时，必须首先声明一个变量，再将匿名函数赋值给这个变量
+	visitAll = func(items []string) {	//如果不分成两部分，函数字面量无法与visitAll绑定，我们也无法递归调用该匿名函数
+		for _, item := range items{
+			if !seen[item] {
+				seen[item] = true
+				visitAll(m[item])
+				order = append(order,item)
+			}
+		}
+	}
+	var keys []string
+	for key := range m{
+		keys = append(keys,key)
+	}
+	sort.Strings(keys)
+	visitAll(keys)
+	return  order
+	
+}
