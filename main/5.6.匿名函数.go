@@ -25,7 +25,9 @@ func main()  {
 	fmt.Println(f())		// 4
 	//例子证明，函数值不仅仅是一串代码，还记录了状态。
 
-
+	for i, course := range topoSort(prereqs){
+		fmt.Printf("%d\t%s\n",i,course)
+	}
 }
 
 
