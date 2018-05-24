@@ -12,6 +12,7 @@ func main()  {
 	fmt.Println(*r)
 
 
+
 }
 
 type Point6 struct {
