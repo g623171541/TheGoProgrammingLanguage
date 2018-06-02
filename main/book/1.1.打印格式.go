@@ -31,7 +31,8 @@ func main()  {
 	// func Fprintf(w io.Writer, format string, a ...interface{}) (n int, err error)
 	// Fprintf 将参数列表 a 填写到格式字符串 format 的占位符中，并将填写后的结果写入 w 中，返回写入的字节数
 	l,err := fmt.Fprintf(os.Stdout,"%d",111)
-	fmt.Println(l,err)
+	fmt.Println(l,err) // l == 3    err == nil
+	// 前缀 F 表示文件（File）也表明格式化输出结果应该被写入第一个参数提供的文件中。
 
 
 	//--------------------------Printf 打印格式化后的内容-------------------------------------
@@ -46,7 +47,7 @@ func main()  {
 	// Sprintf(format string, a ...interface{}) string
 	// Sprintf 将参数列表 a 填写到格式字符串 format 的占位符中，并返回填写后的结果
 	s := fmt.Sprintf("Sprintf %s","abc")
-	fmt.Println(s)
+	fmt.Println("s:",s)
 
 	// ④：Fprint
 	// Fprint(w io.Writer, a ...interface{}) (n int, err error)
