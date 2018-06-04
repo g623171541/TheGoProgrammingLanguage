@@ -47,6 +47,15 @@ const (
 	YiB
 )
 
+const imooc string = "慕课网" 	// 显式声明常量
+const name = "我的名字"			// 隐式声明常量
+const (							// 组合的方式声明常量
+	car string = "猫"
+	dog = "狗🐶"
+)
+const apple, banana string = "苹果", "香蕉"	// 单行定义多个
+const aaa, bbb = 1, "bbb"
+
 
 func main()  {
 	const noDelay time.Duration = 0					//time.Duration 是一个命名类型，底层类型是int64
