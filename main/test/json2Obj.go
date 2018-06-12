@@ -32,8 +32,22 @@ func main() {
 	var obj interface{} // var obj map[string]interface{}
 	json.Unmarshal([]byte(str), &obj)
 	m := obj.(map[string]interface{})
-	//result --> junbin : 21 : true
-	fmt.Println(m["Name"], ":", m["Age"], ":", m["Gender"])
+	//result --> map[name_id:junbin Age:21 Gender:true]
+	fmt.Println(m)
+
+	// 如果想转换成 map[string]string
+	var newMap map[string]string
+	for k, v := range m {
+		switch v.(type) {
+		case float64:
+			newMap[k] = fmt.Sprintf("%d", int64(v.(float64)))
+		default:
+			newMap[k] = fmt.Sprintf("%s", v)
+		}
+	}
+
+	// 这样做就是在解析请求参数的时候更加通用，直接解析为 map[string]interface{} ,通过内部函数再次转换
+
 
 	//unmarshal to slice
 	var strs string = `["Go", "Java", "C", "Php"]`
