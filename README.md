@@ -46,6 +46,11 @@
 
 ### 七. 接口
 - 7.1 接口约定
+- 未看
+
+### 八. Goroutines 和 Channels
+- 8.1 Goroutines
+- 8.2 并发的Clock服务
 
 ---
 目前学到【 231 】页

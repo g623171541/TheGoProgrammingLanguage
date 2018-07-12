@@ -36,3 +36,4 @@
 - 要生成GO语言可执行程序，必须要有main的package包，且必须在改包下有main()函数
 - 同一个路径下只能存在一个package，一个package可以拆成多个源文件组成
 
+### Goroutine 线程
