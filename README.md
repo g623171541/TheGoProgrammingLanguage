@@ -51,6 +51,7 @@
 ### 八. Goroutines 和 Channels
 - 8.1 Goroutines
 - 8.2 并发的Clock服务
+- 8.3 Channels 通信机制
 
 ---
 目前学到【 231 】页
