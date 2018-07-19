@@ -14,7 +14,7 @@ func main()  {
 
 // get
 func httpGet() {
-	resp, err := http.Get("http://www.baidu.com")
+	resp, err := http.Get("https://weixin110.qq.com/s/32899b5c7af")
 	if err != nil {
 		// handle error
 	}
